@@ -1,4 +1,4 @@
-class PullRequestElementModel {
+class PullRequestModel {
   final int labaIndex;
   final String studentName;
   final DateTime date;
@@ -6,7 +6,8 @@ class PullRequestElementModel {
   final int numOfRepasses;
   final String studentId;
   final String prId;
-  const PullRequestElementModel({
+  
+  const PullRequestModel({
     required this.studentId,
     required this.prId,
     required this.labaIndex,

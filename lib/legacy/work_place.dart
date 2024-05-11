@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:tum_proj/view/pr_list/pr_list.dart';
+import 'package:tum_proj/legacy/pr_list/pr_list.dart';
 
 class WorkPlace extends StatelessWidget {
   const WorkPlace({super.key});

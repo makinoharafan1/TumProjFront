@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tum_proj/models/pr_list_element_model.dart';
-import 'package:tum_proj/view/pr_page/pr_page.dart';
+import 'package:tum_proj/model/pr_model.dart';
+import 'package:tum_proj/legacy/pr_page/pr_page.dart';
 
 class PullRequestElement extends StatelessWidget {
   final PullRequestElementModel pr;

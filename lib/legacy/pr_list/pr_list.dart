@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tum_proj/models/pr_list_model.dart';
-import 'package:tum_proj/view/pr_list/pr_list_element.dart';
+import 'package:tum_proj/model/pr_list_model.dart';
+import 'package:tum_proj/legacy/pr_list/pr_list_element.dart';
 
 class PullRequestsList extends StatefulWidget {
   const PullRequestsList({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tum_proj/models/pr_list_element_model.dart';
+import 'package:tum_proj/model/pr_model.dart';
 
 class PullRequestPage extends StatelessWidget {
   final PullRequestElementModel pr;
