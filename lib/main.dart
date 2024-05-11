@@ -1,5 +1,5 @@
 import 'package:puble_frontend/const/constant.dart';
-import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
+import 'package:puble_frontend/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         scaffoldBackgroundColor: backgroundColor,
         brightness: Brightness.dark,
       ),
-      home: const DashboardScreen()
+      home: LoginScreen()
     );
   }
 }

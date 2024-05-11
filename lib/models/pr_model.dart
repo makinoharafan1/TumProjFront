@@ -6,6 +6,7 @@ class PullRequestModel {
   final int numOfRepasses;
   final String studentId;
   final String prId;
+  final String prLink;
   
   const PullRequestModel({
     required this.studentId,
@@ -15,5 +16,6 @@ class PullRequestModel {
     required this.date,
     required this.numOfPassedLabs,
     required this.numOfRepasses,
+    required this.prLink,
   });
 }
