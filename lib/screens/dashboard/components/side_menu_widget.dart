@@ -19,7 +19,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-      color: const Color(0xFF171821),
+      color: sideMenuColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

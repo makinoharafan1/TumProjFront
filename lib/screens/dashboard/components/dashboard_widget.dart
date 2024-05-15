@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:puble_frontend/screens/dashboard/components/header_widget.dart';
-// import 'package:puble_frontend/screens/dashboard/components/test_list.dart';
+import 'package:puble_frontend/screens/dashboard/components/header_widget.dart';
 import 'package:puble_frontend/screens/dashboard/components/pr_list_widget.dart';
 
 class DashboardWidget extends StatelessWidget {
@@ -8,21 +7,25 @@ class DashboardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false, ),
+      child: SingleChildScrollView(
+      primary: false,
+      physics: const NeverScrollableScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
           children: [
-            //HeaderWidget(),
-            //UsersList(),
-            SizedBox(height: 50,),
+            const HeaderWidget(),
+            const SizedBox(height: 10),
             SizedBox(
-              height: double.maxFinite,
+              height: MediaQuery.of(context).size.height,
               child: const PullRequestsList(),
             )
           ],
         ),
       ),
-    );
+    ),
+    ); 
   }
 }

@@ -8,7 +8,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 18),
+        const SizedBox(height: 15),
         Row(
           children: [
             Expanded(
@@ -16,19 +16,22 @@ class HeaderWidget extends StatelessWidget {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: cardBackgroundColor,
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide:
                         BorderSide(color: Theme.of(context).primaryColor),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                    vertical: 5,
+                    vertical: 10, // Adjust this value as needed
+                    horizontal: 15, // Adjust this value as needed
                   ),
                   hintText: 'Search',
                   prefixIcon: const Icon(
