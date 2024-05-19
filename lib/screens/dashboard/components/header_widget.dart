@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:puble_frontend/const/constant.dart';
+import 'package:puble_frontend/utils/search_provider.dart';
+import 'package:puble_frontend/screens/dashboard/components/sort_bar_widget.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -13,6 +17,10 @@ class HeaderWidget extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
+                onChanged: (value) {
+                  Provider.of<SearchProvider>(context, listen: false)
+                      .setQuery(value);
+                },
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: cardBackgroundColor,
@@ -30,8 +38,8 @@ class HeaderWidget extends StatelessWidget {
                         BorderSide(color: Theme.of(context).primaryColor),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10, // Adjust this value as needed
-                    horizontal: 15, // Adjust this value as needed
+                    vertical: 10,
+                    horizontal: 15,
                   ),
                   hintText: 'Search',
                   prefixIcon: const Icon(
@@ -44,6 +52,9 @@ class HeaderWidget extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 4,),
+        const SortBar(),
+        const SizedBox(height: 8),
       ],
     );
   }
