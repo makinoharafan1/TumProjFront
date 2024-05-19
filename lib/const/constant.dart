@@ -7,4 +7,7 @@ const backgroundColor = Color(0xFF15131C);
 const selectionColor = Color(0xFF88B2AC);
 
 const defaultPadding = 20.0;
-const double defaultCircularRadius = 3;
+
+const sideMenuColor = Color(0xFF171821);
+
+const listElementColor = Color.fromARGB(255, 51, 52, 70);
