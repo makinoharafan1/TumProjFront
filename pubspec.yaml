@@ -12,7 +12,10 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   flutter_svg: ^2.0.10+1
   provider: ^6.1.2
+  url_launcher: ^6.2.6
   webview_flutter: ^4.7.0
+  flutter_switch: ^0.3.2
+  email_validator: '^2.1.16'
 
 dev_dependencies:
   flutter_test:

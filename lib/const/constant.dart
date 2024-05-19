@@ -7,3 +7,4 @@ const backgroundColor = Color(0xFF15131C);
 const selectionColor = Color(0xFF88B2AC);
 
 const defaultPadding = 20.0;
+const double defaultCircularRadius = 3;

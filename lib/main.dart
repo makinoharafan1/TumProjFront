@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         scaffoldBackgroundColor: backgroundColor,
         brightness: Brightness.dark,
       ),
-      home: LoginScreen()
+      home: Login(title: "test",)
     );
   }
 }

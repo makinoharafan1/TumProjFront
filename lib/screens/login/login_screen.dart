@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:puble_frontend/const/constant.dart';
-import 'package:puble_frontend/screens/login/components/custom_text_field.dart';
-import 'package:puble_frontend/screens/login/components/custom_button.dart';
-
 import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+import 'package:puble_frontend/widgets/input_widget.dart';
+import 'package:puble_frontend/widgets/app_button_widget.dart';
 
-  // text controllers
-  final loginController = TextEditingController();
+// import 'package:email_validator/email_validator.dart';
+
+class Login extends StatefulWidget {
+  const Login({super.key, required this.title});
+  final String title;
+
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+  bool initialPosition = true;
+  int animationTime = 500;
+
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,61 +31,243 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Container(
-            height: 480,
-            width: 420,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [BoxShadow(
-                color: Colors.black,
-                spreadRadius: 1,
-                blurRadius: 10,
-              )],
+              width: MediaQuery.of(context).size.width / 3.2,
+              height: MediaQuery.of(context).size.height / 1.15,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(defaultCircularRadius),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black,
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Image.asset("logo.png", scale: 2),
+                  Container(
+                    height: 400,
+                    margin: const EdgeInsets.only(
+                        left: 30, top: 30, right: 30, bottom: 0),
+                    child: initialPosition
+                        ? loginForm(context)
+                        : registerForm(context),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  toggle(context, ["Sign In", "Sign Up"]),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+
+  Form loginForm(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          InputWidget(
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (String? value) {},
+            // onChanged: (String? value) {},
+            // validator: (String? value) {},
+            topLabel: "Email",
+            hintText: "Enter E-mail",
+            textEditingController: emailController,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputWidget(
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
+            topLabel: "Password",
+            hintText: "Enter Password",
+            onSaved: (String? uPassword) {},
+            // onChanged: (String? value) {},
+            // validator: (String? value) {},
+            textEditingController: passwordController,
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          AppButton(
+            onPressed: () => ({
+                if (emailController.text == "teacher") {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                  )
+                }
+              }
             ),
+            text: "Login",
+          ),
+        ],
+      ),
+    );
+  }
 
-            child: Column(
-              children: [
+  Form registerForm(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 200,
+                child: InputWidget(
+                  keyboardType: TextInputType.emailAddress,
+                  onSaved: (String? value) {},
+                  // onChanged: (String? value) {},
+                  // validator: (String? value) {},
+                  topLabel: "Name",
+                  hintText: "Enter Name",
+                  textEditingController: nameController,
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: InputWidget(
+                  keyboardType: TextInputType.emailAddress,
+                  onSaved: (String? value) {},
+                  // onChanged: (String? value) {},
+                  // validator: (String? value) {},
+                  topLabel: "Surname",
+                  hintText: "Enter Surname",
+                  textEditingController: surnameController,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputWidget(
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (String? value) {},
+            // onChanged: (String? value) {},
+            // validator: (String? value) {},
+            topLabel: "Email",
+            hintText: "Enter E-mail",
+            textEditingController: emailController,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputWidget(
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
+            topLabel: "Password",
+            hintText: "Enter Password",
+            onSaved: (String? uPassword) {},
+            // onChanged: (String? value) {},
+            // validator: (String? value) {},
+            textEditingController: passwordController,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputWidget(
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
+            topLabel: "Confirm Password",
+            hintText: "Confirm Password",
+            onSaved: (String? uPassword) {},
+            // onChanged: (String? value) {},
+            // validator: (String? value) {},
+            textEditingController: confirmPasswordController,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          AppButton(
+            onPressed: () => (),
+            text: "Create Acount",
+          ),
+        ],
+      ),
+    );
+  }
 
-                const SizedBox(height: 40,),
-
-                const Text(
-                  'Sign in',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+  SizedBox toggle(BuildContext context, List<String> values) {
+    return SizedBox(
+      width: 300,
+      height: 50,
+      child: Stack(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              initialPosition = !initialPosition;
+              nameController.clear();
+              surnameController.clear();
+              emailController.clear();
+              passwordController.clear();
+              confirmPasswordController.clear();
+              setState(() {});
+            },
+            child: Container(
+              width: 300,
+              height: 50,
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  values.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Text(
+                      values[index],
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 ),
-
-                const SizedBox(height: 40,),
-
-                //login textfield
-                CustomTextField(
-                  controller: loginController,
-                  hintText: 'Enter login',
-                  obscureText: false,
-                ),
-
-                const SizedBox(height: 20,),
-
-                //password textfield
-                CustomTextField(
-                  controller: passwordController,
-                  hintText: 'Enter password',
-                  obscureText: true,
-                ),
-                
-                const SizedBox(height: 70,),
-
-                //button
-                CustomButton(onTap:  () => { 
-                  Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const DashboardScreen()),)
-                  },
-                ),
-              ],
-            )
+              ),
+            ),
           ),
-        ),
+          AnimatedAlign(
+            duration: Duration(milliseconds: animationTime),
+            curve: Curves.decelerate,
+            alignment:
+                initialPosition ? Alignment.centerLeft : Alignment.centerRight,
+            child: Container(
+              width: 150,
+              height: 40,
+              decoration: ShapeDecoration(
+                color: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                initialPosition ? values[0] : values[1],
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
