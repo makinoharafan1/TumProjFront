@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:puble_frontend/const/constant.dart';
 import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
 
-import 'package:puble_frontend/widgets/input_widget.dart';
-import 'package:puble_frontend/widgets/app_button_widget.dart';
+import 'package:puble_frontend/screens/login/components/input_widget.dart';
+import 'package:puble_frontend/screens/login/components/app_button_widget.dart';
 
 // import 'package:email_validator/email_validator.dart';
 
@@ -100,14 +100,15 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           ),
           AppButton(
             onPressed: () => ({
-                if (emailController.text == "teacher") {
+              if (emailController.text == "teacher")
+                {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const DashboardScreen()),
                   )
                 }
-              }
-            ),
+            }),
             text: "Login",
           ),
         ],

@@ -11,3 +11,5 @@ const defaultPadding = 20.0;
 const sideMenuColor = Color(0xFF171821);
 
 const listElementColor = Color.fromARGB(255, 51, 52, 70);
+
+const double defaultCircularRadius = 3;
