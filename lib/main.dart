@@ -28,12 +28,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Dashborad UI',
+        title: 'Puble',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: backgroundColor,
           brightness: Brightness.dark,
         ),
-        home: const Login(title: "3212121",));
+        home: const Login());
   }
 }

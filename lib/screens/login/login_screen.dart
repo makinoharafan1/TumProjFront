@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:puble_frontend/const/constant.dart';
 import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
 
@@ -8,8 +10,7 @@ import 'package:puble_frontend/screens/login/components/app_button_widget.dart';
 // import 'package:email_validator/email_validator.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key, required this.title});
-  final String title;
+  const Login({super.key});
 
   @override
   _LoginState createState() => _LoginState();
@@ -100,14 +101,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           ),
           AppButton(
             onPressed: () => ({
-              if (emailController.text == "teacher")
-                {
+              // if (emailController.text == "teacher")
+              //   {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const DashboardScreen()),
                   )
-                }
+                // }
             }),
             text: "Login",
           ),
@@ -123,8 +124,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 200,
+              Expanded(
+                flex: 6,
                 child: InputWidget(
                   keyboardType: TextInputType.emailAddress,
                   onSaved: (String? value) {},
@@ -135,8 +136,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                   textEditingController: nameController,
                 ),
               ),
-              SizedBox(
-                width: 200,
+              const Spacer(flex: 1,),
+              Expanded(
+                flex: 6,
                 child: InputWidget(
                   keyboardType: TextInputType.emailAddress,
                   onSaved: (String? value) {},
@@ -218,6 +220,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
             child: Container(
               width: 300,
               height: 50,
+              margin: const EdgeInsets.only(top: 8, bottom: 8),
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(

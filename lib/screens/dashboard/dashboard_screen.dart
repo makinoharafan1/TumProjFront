@@ -19,9 +19,9 @@ class DashboardScreen extends StatelessWidget {
             )
           : null,
       endDrawer: Responsive.isMobile(context)
-          ? SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: const InfoWidget(),
+          ? const SizedBox(
+              width: 250,
+              child: InfoWidget(),
             )
           : null,
       body: SafeArea(
