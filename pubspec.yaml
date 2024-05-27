@@ -16,6 +16,9 @@ dependencies:
   webview_flutter: ^4.7.0
   flutter_switch: ^0.3.2
   email_validator: '^2.1.16'
+  particles_fly: ^0.0.8
+  animated_background: ^2.0.0
+  flutter_markdown: ^0.6.10
 
 dev_dependencies:
   flutter_test:

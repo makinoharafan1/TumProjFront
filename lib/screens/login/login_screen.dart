@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:puble_frontend/const/constant.dart';
 import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
+import 'package:puble_frontend/screens/dashboard_student/dashboard_student_screen.dart';
 
 import 'package:puble_frontend/screens/login/components/input_widget.dart';
 import 'package:puble_frontend/screens/login/components/app_button_widget.dart';
@@ -28,6 +29,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SafeArea(
         child: Center(
           child: Container(
@@ -101,13 +103,20 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           AppButton(
             onPressed: () => ({
               if (emailController.text == "teacher")
-                {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DashboardScreen()),
-                  )
-                }
+              {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardScreen()),
+                )
+              },
+              if (emailController.text == "student") {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardStudentScreen()),
+                )
+              }
             }),
             text: "Login",
           ),
