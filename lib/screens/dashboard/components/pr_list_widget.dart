@@ -21,7 +21,9 @@ class _PullRequestsListState extends State<PullRequestsList> {
   Widget build(BuildContext context) {
     final query = Provider.of<SearchProvider>(context).query;
     final pullRequests = Provider.of<PullRequestData>(context).data;
-    final sortCriteria = Provider.of<SortProvider>(context).criteria;
+    final sortProvider = Provider.of<SortProvider>(context);
+    final sortCriteria = sortProvider.criteria;
+    final ascending = sortProvider.ascending;
 
     int? queryInt = int.tryParse(query);
 
@@ -32,19 +34,26 @@ class _PullRequestsListState extends State<PullRequestsList> {
         .toList();
 
     filteredItems.sort((a, b) {
+      int comparison;
       switch (sortCriteria) {
         case SortCriteria.labNumber:
-          return a.labNumber.compareTo(b.labNumber);
+          comparison = a.labNumber.compareTo(b.labNumber);
+          break;
         case SortCriteria.name:
-          return a.studentName
-              .toLowerCase()
-              .compareTo(b.studentName.toLowerCase());
+          comparison = a.studentName.toLowerCase().compareTo(b.studentName.toLowerCase());
+          break;
         case SortCriteria.date:
-          return a.date.compareTo(b.date);
+          comparison = a.date.compareTo(b.date);
+          break;
+        case SortCriteria.group:
+          comparison = a.group.toLowerCase().compareTo(b.group.toLowerCase());
+          break;
         default:
           return 0;
       }
+      return ascending ? comparison : -comparison;
     });
+
 
     return ListView.builder(
       shrinkWrap: true,
@@ -87,7 +96,7 @@ class PullRequestElement extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 7,
                   child: Text(
                     pr.studentName.toString(),
                     style: const TextStyle(
@@ -107,7 +116,7 @@ class PullRequestElement extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Text(
                     timeDifference(pr.date),
                     style: const TextStyle(
