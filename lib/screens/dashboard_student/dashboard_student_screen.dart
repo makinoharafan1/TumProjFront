@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:puble_frontend/utils/responsive.dart';
 
 import 'package:puble_frontend/screens/dashboard/components/info_widget.dart';
-// import 'package:puble_frontend/screens/dashboard/components/dashboard_widget.dart';
 import 'package:puble_frontend/screens/dashboard/components/side_menu_widget.dart';
 
-// import 'package:puble_frontend/screens/dashboard_student/components/submitted_task_list.dart';
 import 'package:puble_frontend/screens/dashboard_student/components/task_description.dart';
 import 'package:puble_frontend/screens/dashboard_student/components/task_list.dart';
+
+import 'package:puble_frontend/models/task_model.dart';
 
 class DashboardStudentScreen extends StatefulWidget {
   const DashboardStudentScreen({super.key});
@@ -19,28 +19,27 @@ class DashboardStudentScreen extends StatefulWidget {
 
 class _DashboardStudentScreen extends State<DashboardStudentScreen> {
 
-  String? x = """# ЛР№1 Реализовать движение объектов на игровом поле в рамках подсистемы Игровой сервер.
+  Task? selectedTask;
+  bool isRedacting = false;
 
-Задание:
-1. Реализовать прямолинейное равномерное движение без деформации космического корабля и фотонной торпеды.
+  void updateMode(bool state) => setState(() {isRedacting = state;});
+  void updateSelectedTask(Task newTask){
+    
+    if (selectedTask == newTask) {
+      return;
+    }
 
-## Definition of Done критерии
+    updateMode(false);
+    setState(() => selectedTask = newTask);
+  }
 
-1. Само движение реализовано в виде отдельного класса
-2. Для движущихся объектов определен интерфейс, устойчивый к появлению новых видов движущихся объектов
-3. Код решения опубликован на github в отдельной ветке (каждая задача).
-4. Код компилируется без ошибок
-5. Реализован тест: Для объекта, находящегося в точке (12, 5) и движущегося со скоростью (-7, 3) движение меняет положение объекта на (5, 8)
-6. Реализован тест: Попытка сдвинуть объект, у которого невозможно прочитать положение объекта в пространстве, приводит к ошибке
-7. Реализован тест: Попытка сдвинуть объект, у которого невозможно прочитать значение мгновенной скорости, приводит к ошибке
-8. Реализован тест: Попытка сдвинуть объект, у которого невозможно изменить положение в пространстве, приводит к ошибке
-9. Все тесты успешно выполняются.
-10. Настроен расчет покрытия кода тестами.
-11. Настроен CI, который умеет собирать проект и прогонять тесты, вычислять покрытие кода тестами.
-12. Покрытие кода тестами 100%.
-13. Пайплайн “зеленый”""";
+  double descriptionBoxWidthStart = 550;
+  double descriptionBoxWidthMin = 250;
+  double descriptionBoxWidthMax = 700;
 
-  double width_ = 500;
+  double descriptionBoxWidth = 550;
+
+  double opacityLevel = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,37 +70,49 @@ class _DashboardStudentScreen extends State<DashboardStudentScreen> {
                   child: SideMenuWidget(),
                 ),
               ),
-            const Expanded(
+            Expanded(
               flex: 6,
-              child: TaskList(),
+              child: TaskList(callback: updateSelectedTask,),
             ),
-            if (x != null)
+            if (selectedTask != null)
               Row(
                 children: [
                   GestureDetector(
                     onHorizontalDragUpdate: (details) {
-                      if (details.delta.dx > 0) {
-                        final newWidth = width_ - details.delta.distance;
-                        setState(() {
-                          width_ = newWidth;
+                      setState(() {
+                          opacityLevel = 1;
+
+                          descriptionBoxWidth = (descriptionBoxWidth - details.delta.dx).clamp(descriptionBoxWidthMin, descriptionBoxWidthMax);
+                          if (descriptionBoxWidth == descriptionBoxWidthMin) {
+                            selectedTask = null;
+                            descriptionBoxWidth = descriptionBoxWidthStart;
+                          }
                       });
-                      }
-                      if (details.delta.dx < 0){
-                        final newWidth = width_ + details.delta.distance;
-                        setState(() {
-                          width_ = newWidth;
-                      });
-                      }
                     },
-                    child: Container(
-                        width: 10,
-                        height: MediaQuery.of(context).size.height,
-                        color: Colors.purple,
+                    onHorizontalDragEnd: (dragEndDetails){
+                      setState(() {opacityLevel = 0;});
+                    },
+                    child : InkWell(
+                      onTap: () => (),
+                      onHover: (value) {
+                        setState(() {
+                          opacityLevel = value ? 1 : 0;
+                        });
+                      },
+                      child: AnimatedOpacity(
+                        opacity: opacityLevel,
+                        duration: const Duration(milliseconds: 100),
+                        child: Container(
+                            width: 5,
+                            height: MediaQuery.of(context).size.height,
+                            color: Colors.blue,
+                        ),
+                      ),
                     ),
                   ),
-                  Container(
-                    width: width_,
-                    child: TaskDescription(description: x!,),
+                  SizedBox(
+                    width: descriptionBoxWidth,
+                    child: TaskDescription(selectedTask: selectedTask!, updateMode: updateMode, isRedacting: isRedacting,),
                   )
                 ],
               ),
