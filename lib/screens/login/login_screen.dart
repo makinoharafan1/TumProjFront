@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:particles_fly/particles_fly.dart';
+
 import 'package:puble_frontend/const/constant.dart';
-import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
-import 'package:puble_frontend/screens/dashboard_student/dashboard_student_screen.dart';
-
-import 'package:puble_frontend/screens/login/components/input_widget.dart';
-import 'package:puble_frontend/screens/login/components/app_button_widget.dart';
-
-// import 'package:email_validator/email_validator.dart';
+import 'package:puble_frontend/screens/login/components/login_form.dart';
+import 'package:puble_frontend/screens/login/components/register_form.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key, required this.title});
-  final String title;
+  const Login({super.key});
 
   @override
-  _LoginState createState() => _LoginState();
+  State<Login> createState() {
+    return _LoginState();
+  }
 }
 
 class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
-  bool initialPosition = true;
-  int animationTime = 500;
-
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
   final emailController = TextEditingController();
@@ -28,256 +23,88 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      body: SafeArea(
-        child: Center(
-          child: Container(
-              width: MediaQuery.of(context).size.width / 3.2,
-              height: MediaQuery.of(context).size.height / 1.15,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(defaultCircularRadius),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black,
-                    spreadRadius: 1,
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Image.asset("logo.png", scale: 2),
-                  Container(
-                    height: 400,
-                    margin: const EdgeInsets.only(
-                        left: 30, top: 30, right: 30, bottom: 0),
-                    child: initialPosition
-                        ? loginForm(context)
-                        : registerForm(context),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  toggle(context, ["Sign In", "Sign Up"]),
-                ],
-              )),
-        ),
-      ),
-    );
-  }
-
-  Form loginForm(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          InputWidget(
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (String? value) {},
-            // onChanged: (String? value) {},
-            // validator: (String? value) {},
-            topLabel: "Email",
-            hintText: "Enter E-mail",
-            textEditingController: emailController,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InputWidget(
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: true,
-            topLabel: "Password",
-            hintText: "Enter Password",
-            onSaved: (String? uPassword) {},
-            // onChanged: (String? value) {},
-            // validator: (String? value) {},
-            textEditingController: passwordController,
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          AppButton(
-            onPressed: () => ({
-              if (emailController.text == "teacher")
-              {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashboardScreen()),
-                )
-              },
-              if (emailController.text == "student") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashboardStudentScreen()),
-                )
-              }
-            }),
-            text: "Login",
-          ),
-        ],
-      ),
-    );
-  }
-
-  Form registerForm(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 200,
-                child: InputWidget(
-                  keyboardType: TextInputType.emailAddress,
-                  onSaved: (String? value) {},
-                  // onChanged: (String? value) {},
-                  // validator: (String? value) {},
-                  topLabel: "Name",
-                  hintText: "Enter Name",
-                  textEditingController: nameController,
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: InputWidget(
-                  keyboardType: TextInputType.emailAddress,
-                  onSaved: (String? value) {},
-                  // onChanged: (String? value) {},
-                  // validator: (String? value) {},
-                  topLabel: "Surname",
-                  hintText: "Enter Surname",
-                  textEditingController: surnameController,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InputWidget(
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (String? value) {},
-            // onChanged: (String? value) {},
-            // validator: (String? value) {},
-            topLabel: "Email",
-            hintText: "Enter E-mail",
-            textEditingController: emailController,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InputWidget(
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: true,
-            topLabel: "Password",
-            hintText: "Enter Password",
-            onSaved: (String? uPassword) {},
-            // onChanged: (String? value) {},
-            // validator: (String? value) {},
-            textEditingController: passwordController,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InputWidget(
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: true,
-            topLabel: "Confirm Password",
-            hintText: "Confirm Password",
-            onSaved: (String? uPassword) {},
-            // onChanged: (String? value) {},
-            // validator: (String? value) {},
-            textEditingController: confirmPasswordController,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          AppButton(
-            onPressed: () => (),
-            text: "Create Acount",
-          ),
-        ],
-      ),
-    );
-  }
-
-  SizedBox toggle(BuildContext context, List<String> values) {
-    return SizedBox(
-      width: 300,
-      height: 50,
-      child: Stack(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              initialPosition = !initialPosition;
-              nameController.clear();
-              surnameController.clear();
-              emailController.clear();
-              passwordController.clear();
-              confirmPasswordController.clear();
-              setState(() {});
-            },
-            child: Container(
-              width: 300,
-              height: 50,
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(
-                  values.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: Text(
-                      values[index],
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            ParticlesFly(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              connectDots: true,
+              numberOfParticles: 150,
+              speedOfParticles: 0.1,
+              lineStrokeWidth: 0.25,
+              isRandomColor: true,
+              lineColor: cardBackgroundColor,
+              hoverRadius: 1000,
+            ),
+            SafeArea(
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 3.2,
+                  decoration: const BoxDecoration(
+                    color: backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
                         color: Colors.black,
+                        spreadRadius: 2,
+                        blurRadius: 10,
                       ),
-                    ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const SizedBox(height: 30),
+                      Expanded(
+                        flex: 2,
+                        child: Image.asset("logo.png", scale: 1),
+                      ),
+                      const SizedBox(height: 30),
+                      const Expanded(
+                        flex: 1,
+                        child: TabBar(
+                          labelColor: Colors.white,
+                          indicatorColor: Colors.white,
+                          tabs: [
+                            Tab(text: "Sign in"),
+                            Tab(text: "Sign up"),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Expanded(
+                        flex: 6,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: TabBarView(
+                            children: [
+                              loginForm(
+                                context, 
+                                passwordController,
+                                emailController
+                              ),
+                              registerForm(
+                                context,
+                                nameController,
+                                surnameController,
+                                emailController,
+                                passwordController,
+                                confirmPasswordController,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
-          AnimatedAlign(
-            duration: Duration(milliseconds: animationTime),
-            curve: Curves.decelerate,
-            alignment:
-                initialPosition ? Alignment.centerLeft : Alignment.centerRight,
-            child: Container(
-              width: 150,
-              height: 40,
-              decoration: ShapeDecoration(
-                color: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                initialPosition ? values[0] : values[1],
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
