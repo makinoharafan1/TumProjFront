@@ -1,75 +1,62 @@
 import 'package:flutter/material.dart';
 
+import 'package:puble_frontend/screens/dashboard_student/components/circle_icon_button.dart';
+import 'package:puble_frontend/screens/dashboard_student/components/circle_icon.dart';
+
+import 'package:puble_frontend/screens/dashboard_student/components/confirmation_window.dart';
+import 'package:puble_frontend/screens/dashboard_student/components/load_work_window.dart';
+
 enum TaskState { NotLoaded, Awaiting, Rejected, Approved}
-
-var map = <TaskState, StateData>{
-  TaskState.NotLoaded: StateData(
-    icon: Icons.add,
-    color: Colors.grey,
-  ),
-  TaskState.Awaiting: StateData(
-    icon: Icons.remove_red_eye,
-    color: Colors.yellow,
-  ),
-  TaskState.Rejected: StateData(
-    icon: Icons.clear,
-    color: Colors.red,
-  ),
-  TaskState.Approved: StateData(
-    icon: Icons.check,
-    color: Colors.green,
-  ),
-};
-
-class StateData{
-  final IconData icon;
-  final Color color;
-
-  StateData({
-    required this.icon,
-    required this.color,
-  });
-}
-
-// var map = <TaskState, Widget>{
-//   TaskState.NotLoaded: CircleAvatar(
-//     backgroundColor: Colors.grey,
-//     child: IconButton(
-//       icon: const Icon(Icons.add, color: Colors.black),
-//       onPressed: () async {
-
-//       },
-//     ),
-//   ),
-
-//   TaskState.Awaiting: const CircleAvatar(
-//     backgroundColor: Colors.yellow,
-//     child: Icon(Icons.remove_red_eye, color: Colors.black),
-//   ),
-
-//   TaskState.Approved: const CircleAvatar(
-//     backgroundColor: Colors.green,
-//     child: Icon(Icons.check, color: Colors.black),
-//   ),
-
-//   TaskState.Rejected: CircleAvatar(
-//     backgroundColor: Colors.red,
-//     child: IconButton(
-//       icon: const Icon(Icons.clear, color: Colors.black),
-//       onPressed: () async {
-
-//       },
-//     ),
-//   ),
-// };
 
 class Task{
   final int number;
-  final String description;
-  final TaskState state;
+  String description;
+  TaskState state;
   Task({
     required this.number,
     required this.description,
     required this.state,
   });
 }
+
+var map = <TaskState, Function(BuildContext)>{
+  TaskState.NotLoaded: (context) {
+    return CircleIconButton(
+      onPress: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => const LoadWorkWindow(title: "Отправка", hintText: "Вставте ссылку на репозиторий",),
+      ),
+      backgroundColor: Colors.grey,
+      iconContentColor: Colors.black, 
+      iconData: Icons.add,
+    );
+  },
+
+  TaskState.Awaiting: (context) {
+    return const CircleIcon(
+      backgroundColor: Colors.yellow,
+      iconContentColor: Colors.black, 
+      iconData: Icons.remove_red_eye,
+    );
+  },
+
+  TaskState.Approved: (context) {
+    return const CircleIcon(
+      backgroundColor: Colors.green,
+      iconContentColor: Colors.black, 
+      iconData: Icons.check,
+    );
+  },
+
+  TaskState.Rejected: (context) {
+    return CircleIconButton(
+      onPress: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => const ConfirmationWindow(title: "Подтверждение", description: "Отправить работу на проверку преподавателю",),
+      ),
+      backgroundColor: Colors.red,
+      iconContentColor: Colors.black, 
+      iconData: Icons.clear,
+    );
+  }
+};

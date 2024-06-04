@@ -5,12 +5,15 @@ import 'package:provider/provider.dart';
 import 'package:puble_frontend/data/task_data.dart';
 
 import 'package:puble_frontend/models/task_model.dart';
-import 'package:puble_frontend/screens/dashboard_student/components/circle_icon_button.dart';
-import 'package:puble_frontend/screens/dashboard_student/components/circle_icon.dart';
+
 
 class TaskList extends StatelessWidget {
+
+  final void Function(Task) callback;
+
   const TaskList({
-    super.key,
+    super.key, 
+    required this.callback,
   });
 
   @override
@@ -43,7 +46,7 @@ class TaskList extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: tasks.length,
-                  itemBuilder: (context, index) => TaskElement(task: tasks[index]),
+                  itemBuilder: (context, index) => TaskElement(task: tasks[index], callback: callback,),
                 ),
               ),
           ],
@@ -56,7 +59,13 @@ class TaskList extends StatelessWidget {
 class TaskElement extends StatelessWidget {
   final Task task;
 
-  const TaskElement({super.key, required this.task});
+  final void Function(Task) callback;
+
+  const TaskElement({
+    super.key, 
+    required this.task,
+    required this.callback
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -94,32 +103,12 @@ class TaskElement extends StatelessWidget {
                     ),
                   ),
                 ),
-                
-                if (task.state == TaskState.Rejected)
-                  CircleIconButton(
-                    onPress: () => {}, 
-                    backgroundColor: map[task.state]!.color,
-                    iconContentColor: Colors.black, 
-                    iconData: map[task.state]!.icon,
-                  )
-                else if (task.state == TaskState.NotLoaded)
-                  CircleIconButton(
-                    onPress: () => {}, 
-                    backgroundColor: map[task.state]!.color,
-                    iconContentColor: Colors.black, 
-                    iconData: map[task.state]!.icon,
-                  )
-                else
-                  CircleIcon(
-                      backgroundColor: map[task.state]!.color,
-                      iconContentColor: Colors.black, 
-                      iconData: map[task.state]!.icon,
-                    )
+                map[task.state]!(context),
               ],
             ),
           ),
           onPressed: () async {
-            // _openLink(pr.prLink);
+            callback(task);
           },
         ),
       ),
