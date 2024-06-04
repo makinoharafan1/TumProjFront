@@ -13,11 +13,11 @@ class InputWidget extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
-  final Key? key;
   final TextEditingController? textEditingController;
   final String? initialValue;
 
-  InputWidget({
+  const InputWidget({
+    super.key,
     this.hintText,
     this.prefixIcon,
     this.height = 48.0,
@@ -28,29 +28,30 @@ class InputWidget extends StatelessWidget {
     this.errorText,
     this.onChanged,
     this.validator,
-    this.key,
     this.textEditingController,
     this.initialValue,
   });
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(topLabel!),
+        Text(
+          topLabel!, 
+          style: const TextStyle(color: Colors.white)),
         const SizedBox(height: 4.0),
         Container(
           height: 45,
           decoration: BoxDecoration(
             color: cardBackgroundColor,
-            //color: Theme.of(context).buttonColor,
             borderRadius: BorderRadius.circular(defaultCircularRadius),
           ),
           child: TextFormField(
+            style: const TextStyle(color: Colors.white),
             textAlignVertical: TextAlignVertical.bottom,
             initialValue: initialValue,
             controller: textEditingController,
-            key: key,
             keyboardType: keyboardType,
             onSaved: onSaved,
             onChanged: onChanged,
@@ -72,18 +73,18 @@ class InputWidget extends StatelessWidget {
                     const TextStyle(height: 0, color: Colors.transparent),
                 errorBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Theme.of(context).errorColor,
+                    color: Theme.of(context).colorScheme.error,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Theme.of(context).errorColor,
+                    color: Theme.of(context).colorScheme.error,
                   ),
                 ),
                 hintText: hintText,
                 hintStyle: Theme.of(context)
                     .textTheme
-                    .bodyText1!
+                    .bodyLarge!
                     .copyWith(color: Colors.white54),
                 errorText: errorText),
           ),
