@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:puble_frontend/const/constant.dart';
 import 'package:provider/provider.dart';
 import 'package:puble_frontend/utils/sort_provider.dart';
 
@@ -43,7 +44,7 @@ class SortBar extends StatelessWidget {
                           fontWeight: sortProvider.criteria == criteria
                               ? FontWeight.bold
                               : FontWeight.normal,
-                          color: Colors.white,
+                          color: mainTextColor,
                         ),
                       ),
                       WidgetSpan(

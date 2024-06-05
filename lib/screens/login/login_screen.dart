@@ -65,8 +65,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       const Expanded(
                         flex: 1,
                         child: TabBar(
-                          labelColor: Colors.white,
-                          indicatorColor: Colors.white,
+                          labelColor: mainTextColor,
+                          indicatorColor: mainTextColor,
                           tabs: [
                             Tab(text: "Sign in"),
                             Tab(text: "Sign up"),

@@ -39,16 +39,16 @@ class InputWidget extends StatelessWidget {
       children: [
         Text(
           topLabel!, 
-          style: const TextStyle(color: Colors.white)),
+          style: const TextStyle(color: mainTextColor)),
         const SizedBox(height: 4.0),
         Container(
           height: 45,
           decoration: BoxDecoration(
             color: cardBackgroundColor,
-            borderRadius: BorderRadius.circular(defaultCircularRadius),
+            borderRadius: BorderRadius.circular(lowCircularRadius),
           ),
           child: TextFormField(
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: mainTextColor),
             textAlignVertical: TextAlignVertical.bottom,
             initialValue: initialValue,
             controller: textEditingController,

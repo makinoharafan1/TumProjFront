@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:puble_frontend/const/constant.dart';
 import 'package:puble_frontend/utils/search_provider.dart';
-import 'package:puble_frontend/screens/dashboard/components/sort_bar_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/sort_bar_widget.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -25,15 +25,15 @@ class HeaderWidget extends StatelessWidget {
                   filled: true,
                   fillColor: cardBackgroundColor,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(mediumCircularRadius),
                     borderSide: const BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(mediumCircularRadius),
                     borderSide: const BorderSide(color: Colors.black),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(mediumCircularRadius),
                     borderSide:
                         BorderSide(color: Theme.of(context).primaryColor),
                   ),

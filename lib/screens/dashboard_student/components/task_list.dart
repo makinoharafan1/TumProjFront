@@ -11,9 +11,12 @@ class TaskList extends StatelessWidget {
 
   final void Function(Task) callback;
 
+  final String title;
+
   const TaskList({
     super.key, 
     required this.callback,
+    required this.title,
   });
 
   @override
@@ -31,13 +34,14 @@ class TaskList extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+               Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  "Title",
+                  title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
+                    color: mainTextColor,
                   ),
                 ),
               ),
@@ -74,7 +78,7 @@ class TaskElement extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: cardBackgroundColor,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(highCircularRadius),
         ),
         child: IconButton(
           icon: Padding(
@@ -90,6 +94,7 @@ class TaskElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.fade,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
@@ -100,6 +105,7 @@ class TaskElement extends StatelessWidget {
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),

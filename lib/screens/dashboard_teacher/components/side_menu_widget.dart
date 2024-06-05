@@ -50,7 +50,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
       margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
-          Radius.circular(6.0),
+          Radius.circular(lowCircularRadius),
         ),
         color: isSelected ? selectionColor : Colors.transparent,
       ),

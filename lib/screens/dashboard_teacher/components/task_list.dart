@@ -34,10 +34,11 @@ class TeacherTaskList extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                "Title",
+                "Task List",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
+                  color: mainTextColor,
                 ),
               ),
             ),
@@ -73,7 +74,7 @@ class TaskElement extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: listElementColor,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(highCircularRadius),
         ),
         child: IconButton(
           icon: Padding(
@@ -89,7 +90,7 @@ class TaskElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.fade,
                       fontSize: 14,
-                      color: Colors.white,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
@@ -100,7 +101,7 @@ class TaskElement extends StatelessWidget {
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 14,
-                      color: Colors.white,
+                      color: mainTextColor,
                     ),
                   ),
                 ),

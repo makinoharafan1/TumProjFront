@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:puble_frontend/utils/responsive.dart';
 
 import 'package:puble_frontend/screens/dashboard_student/components/info_widget.dart';
-import 'package:puble_frontend/screens/dashboard/components/side_menu_widget.dart';
-
-// import 'package:puble_frontend/screens/dashboard_student/components/task_description.dart';
+import 'package:puble_frontend/screens/dashboard_student/components/side_menu_widget.dart';
 import 'package:puble_frontend/screens/dashboard_student/components/task_list.dart';
-
 import 'package:puble_frontend/models/task_model.dart';
 
 class DashboardStudentScreen extends StatefulWidget {
@@ -64,15 +61,13 @@ class _DashboardStudentScreen extends State<DashboardStudentScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (isDesktop)
-              const Expanded(
-                flex: 2,
-                child: SizedBox(
-                  child: SideMenuWidget(),
-                ),
-              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: const SideMenuWidget(),
+              ),  
             Expanded(
               flex: 6,
-              child: TaskList(callback: updateSelectedTask,),
+              child: TaskList(callback: updateSelectedTask, title: "OOAIP",),
             ),
             currentWidget!,
           ],

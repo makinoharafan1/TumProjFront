@@ -3,7 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:puble_frontend/const/constant.dart';
 
-import 'package:puble_frontend/screens/dashboard_student/components/task_description_button.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/task_description_button.dart';
 
 import 'package:puble_frontend/models/task_model.dart';
 
@@ -83,14 +83,12 @@ class _TeacherTaskDescription extends State<TeacherTaskDescription> {
           ),
           TextField(
             controller: textEditingController,
+            style: const TextStyle(
+              color: mainTextColor,
+            ),
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
-            onChanged: (String text) {
-              setState(() {
-                textEditingController.text = text;
-              });
-            },
             keyboardType: TextInputType.multiline,
             maxLines: null,
           ),
@@ -124,8 +122,50 @@ class _TeacherTaskDescription extends State<TeacherTaskDescription> {
         Expanded(
           child: Markdown(
             data: text,
-            styleSheet: MarkdownStyleSheet(
-              
+            styleSheet: MarkdownStyleSheet.fromTheme(
+              ThemeData(
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 38,
+                  ),
+
+                  headline2: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 34,
+                  ),
+
+                  headline3: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 30,
+                  ),
+
+                  headline4: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 30,
+                  ),
+
+                  headline5: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 22,
+                  ),
+
+                  headline6: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 18,
+                  ),
+
+                  bodyText1: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 14,
+                  ),
+
+                  bodyText2: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
             ),
           ),
         ),

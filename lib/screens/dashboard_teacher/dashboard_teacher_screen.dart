@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:puble_frontend/utils/responsive.dart';
-import 'package:puble_frontend/screens/dashboard/components/info_widget.dart';
-import 'package:puble_frontend/screens/dashboard/components/dashboard_widget.dart';
-import 'package:puble_frontend/screens/dashboard/components/side_menu_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/info_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/dashboard_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/side_menu_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -30,20 +30,15 @@ class DashboardScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (isDesktop)
-              const Expanded(
-                flex: 2,
-                child: SizedBox(
-                  child: SideMenuWidget(),
-                ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: const SideMenuWidget(),
               ),
             const Expanded(
               flex: 6,
               child: DashboardWidget(),
             ),
-            const Expanded(
-              flex: 3,
-              child: InfoWidget(),
-            ),
+            const InfoWidget(),
           ],
         ),
       ),

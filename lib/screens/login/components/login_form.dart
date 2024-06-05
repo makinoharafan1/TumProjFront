@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:puble_frontend/screens/dashboard/dashboard_screen.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/dashboard_teacher_screen.dart';
 import 'package:puble_frontend/screens/dashboard_student/dashboard_student_screen.dart';
 import 'package:puble_frontend/screens/login/components/input_widget.dart';
 import 'package:puble_frontend/screens/login/components/app_button_widget.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:puble_frontend/const/constant.dart';
 
 class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -15,7 +16,7 @@ class AppButton extends StatelessWidget {
         height: 45,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(mediumCircularRadius),
         ),
         child: Center(
           child: Text(text!,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:puble_frontend/screens/dashboard/components/header_widget.dart';
-import 'package:puble_frontend/screens/dashboard/components/pr_list_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/header_widget.dart';
+import 'package:puble_frontend/screens/dashboard_teacher/components/pr_list_widget.dart';
 
 class DashboardWidget extends StatelessWidget {
   const DashboardWidget({super.key});

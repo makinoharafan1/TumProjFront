@@ -46,8 +46,50 @@ class _TaskDescription extends State<TaskDescription> {
             Expanded(
               child: Markdown(
                 data: widget.selectedTask == null ? "" : widget.selectedTask!.description,
-                styleSheet: MarkdownStyleSheet(
-                  
+                styleSheet: MarkdownStyleSheet.fromTheme(
+                  ThemeData(
+                    textTheme: const TextTheme(
+                      headline1: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 38,
+                      ),
+
+                      headline2: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 34,
+                      ),
+
+                      headline3: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 30,
+                      ),
+
+                      headline4: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 30,
+                      ),
+
+                      headline5: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 22,
+                      ),
+
+                      headline6: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 18,
+                      ),
+
+                      bodyText1: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 14,
+                      ),
+
+                      bodyText2: TextStyle(
+                        color: mainTextColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

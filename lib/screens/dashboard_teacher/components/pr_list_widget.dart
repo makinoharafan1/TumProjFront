@@ -76,7 +76,7 @@ class PullRequestElement extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: cardBackgroundColor,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(highCircularRadius),
         ),
         child: IconButton(
           icon: Padding(
@@ -92,6 +92,7 @@ class PullRequestElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.fade,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
@@ -102,6 +103,7 @@ class PullRequestElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
@@ -112,6 +114,7 @@ class PullRequestElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
@@ -122,6 +125,7 @@ class PullRequestElement extends StatelessWidget {
                     style: const TextStyle(
                       overflow: TextOverflow.fade,
                       fontSize: 20,
+                      color: mainTextColor,
                     ),
                   ),
                 ),
