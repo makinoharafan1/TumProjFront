@@ -21,13 +21,35 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabChange);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabChange() {
+    nameController.clear();
+    surnameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
+        length: 2,
+        child: Scaffold(
+          body: Stack(children: <Widget>[
             ParticlesFly(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -59,15 +81,17 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       const SizedBox(height: 30),
                       Expanded(
                         flex: 2,
-                        child: Image.asset("logo.png", scale: 1),
+                        child: Image.asset("logo.png", scale: 0.1),
                       ),
                       const SizedBox(height: 30),
-                      const Expanded(
+                      Expanded(
                         flex: 1,
                         child: TabBar(
-                          labelColor: mainTextColor,
-                          indicatorColor: mainTextColor,
-                          tabs: [
+                          controller: _tabController,
+                          labelColor: Colors.white,
+                          indicatorColor: Colors.white,
+                          // indicatorSize: TabBarIndicatorSize.label,
+                          tabs: const [
                             Tab(text: "Sign in"),
                             Tab(text: "Sign up"),
                           ],
@@ -79,12 +103,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: TabBarView(
+                            controller: _tabController,
                             children: [
                               loginForm(
-                                context, 
-                                passwordController,
-                                emailController
-                              ),
+                                  context, passwordController, emailController),
                               registerForm(
                                 context,
                                 nameController,
@@ -103,9 +125,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          ]),
+        ));
   }
 }
