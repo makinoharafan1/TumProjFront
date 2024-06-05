@@ -3,22 +3,17 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:puble_frontend/const/constant.dart';
 
-import 'package:puble_frontend/screens/dashboard_student/components/task_description_button.dart';
-
 import 'package:puble_frontend/models/task_model.dart';
 
 class TaskDescription extends StatefulWidget {
   const TaskDescription({
     super.key, 
-    required this.selectedTask, 
-    required this.updateMode, 
-    required this.isRedacting,
+    required this.selectedTask,
+    required this.close,
     });
 
-  final Function(bool) updateMode;
-
-  final Task selectedTask;
-  final bool isRedacting;
+  final Task? selectedTask;
+  final Function() close;
 
   @override
   _TaskDescription createState() => _TaskDescription();
@@ -26,13 +21,8 @@ class TaskDescription extends StatefulWidget {
 
 class _TaskDescription extends State<TaskDescription> {
 
-  String? savedText;
-
-  TextEditingController textEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    textEditingController.text = widget.selectedTask.description;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       decoration: const BoxDecoration(
@@ -41,81 +31,29 @@ class _TaskDescription extends State<TaskDescription> {
       child: Container(
         margin: const EdgeInsets.all(10),
         height: MediaQuery.of(context).size.height,
-        child: widget.isRedacting
-            ? redactForm(context)
-            : viewForm(context, textEditingController.text),
-      ),
-    );
-  }
-
-  SingleChildScrollView redactForm(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TaskDescriptionButton(
-                text: "Save Changes", 
-                onTap: () => (
-                  setState(() {
-                    widget.selectedTask.description = textEditingController.text;
-                    widget.updateMode(!widget.isRedacting);
-                  })
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  iconSize: 25,
+                  icon: const Icon(Icons.clear, color: Colors.white),
+                  onPressed: widget.close,
+                ),
+              ]
+            ),
+            Expanded(
+              child: Markdown(
+                data: widget.selectedTask == null ? "" : widget.selectedTask!.description,
+                styleSheet: MarkdownStyleSheet(
+                  
                 ),
               ),
-              TaskDescriptionButton(
-                text: "Undo Changes", 
-                onTap: () => (
-                  setState(() {
-                      widget.selectedTask.description = savedText!;
-                      widget.updateMode(!widget.isRedacting);
-                    })
-                  ),
-                ),
-            ],
-          ),
-          TextField(
-            controller: textEditingController,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
-            onChanged: (String text) {
-              setState(() {
-                textEditingController.text = text;
-              });
-            },
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Column viewForm(BuildContext context, String text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TaskDescriptionButton(text: "Redact", 
-              onTap: () => (
-                setState(() {
-                  savedText = widget.selectedTask.description;
-                  widget.updateMode(!widget.isRedacting);
-                })
-                ),
             ),
           ],
         ),
-        Expanded(
-          child: Markdown(
-            data: text,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
