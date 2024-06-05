@@ -43,6 +43,7 @@ class InputWidget extends StatelessWidget {
         const SizedBox(height: 4.0),
         Container(
           height: 45,
+          width: 400,
           decoration: BoxDecoration(
             color: cardBackgroundColor,
             borderRadius: BorderRadius.circular(defaultCircularRadius),

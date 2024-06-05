@@ -13,39 +13,26 @@ Form registerForm(
   return Form(
     child: Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 7,
-              child: InputWidget(
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (String? value) {},
-                // onChanged: (String? value) {},
-                // validator: (String? value) {},
-                topLabel: "Name",
-                hintText: "Enter name",
-                textEditingController: nameController,
-              ),
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            Expanded(
-              flex: 7,
-              child: InputWidget(
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (String? value) {},
-                // onChanged: (String? value) {},
-                // validator: (String? value) {},
-                topLabel: "Surname",
-                hintText: "Enter surname",
-                textEditingController: surnameController,
-              ),
-            ),
-          ],
+        InputWidget(
+          keyboardType: TextInputType.emailAddress,
+          onSaved: (String? value) {},
+          // onChanged: (String? value) {},
+          // validator: (String? value) {},
+          topLabel: "Name",
+          hintText: "Enter name",
+          textEditingController: nameController,
         ),
-        const Spacer(flex: 2),
+        const Spacer(flex: 3),
+        InputWidget(
+          keyboardType: TextInputType.emailAddress,
+          onSaved: (String? value) {},
+          // onChanged: (String? value) {},
+          // validator: (String? value) {},
+          topLabel: "Surname",
+          hintText: "Enter surname",
+          textEditingController: surnameController,
+        ),
+        const Spacer(flex: 3),
         InputWidget(
           keyboardType: TextInputType.emailAddress,
           onSaved: (String? value) {},
@@ -55,7 +42,7 @@ Form registerForm(
           hintText: "Enter e-mail",
           textEditingController: emailController,
         ),
-        const Spacer(flex: 2),
+        const Spacer(flex: 3),
         InputWidget(
           keyboardType: TextInputType.visiblePassword,
           obscureText: true,
@@ -66,7 +53,7 @@ Form registerForm(
           // validator: (String? value) {},
           textEditingController: passwordController,
         ),
-        const Spacer(flex: 2),
+        const Spacer(flex: 3),
         InputWidget(
           keyboardType: TextInputType.visiblePassword,
           obscureText: true,
@@ -77,7 +64,7 @@ Form registerForm(
           // validator: (String? value) {},
           textEditingController: confirmPasswordController,
         ),
-        const Spacer(flex: 3),
+        const Spacer(flex: 8),
         AppButton(
           onPressed: () => (),
           text: "Create account",
