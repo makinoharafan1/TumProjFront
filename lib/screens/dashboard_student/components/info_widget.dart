@@ -37,7 +37,8 @@ class _InfoWidget extends State<InfoWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: currentWidget!,
+      width: 550,
+      child: null,
     );
   }
 }
