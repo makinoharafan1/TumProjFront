@@ -1,15 +1,17 @@
-class PullRequestModel {
-  final int labNumber;
-  final String studentName;
-  final String group;
-  final DateTime date;
-  final int numOfPassedLabs;
-  final int numOfRepasses;
-  final String studentId;
-  final String prId;
-  final String prLink;
+import 'package:puble_frontend/data/pr_data.dart';
 
-  const PullRequestModel({
+class PullRequestModel {
+  late int labNumber;
+  late String studentName;
+  late String group;
+  late DateTime date;
+  late int numOfPassedLabs;
+  late int numOfRepasses;
+  late String studentId;
+  late String prId;
+  late String prLink;
+
+  PullRequestModel({
     required this.studentId,
     required this.prId,
     required this.labNumber,
@@ -20,4 +22,15 @@ class PullRequestModel {
     required this.numOfRepasses,
     required this.prLink,
   });
+  PullRequestModel.fromJson(Map json) {
+    labNumber = json['labNumber'];
+    studentName = json['studentName'];
+    group = json['group'];
+    date = DateTime.parse(json['date']);
+    numOfPassedLabs = json['numOfPassedLabs'];
+    numOfRepasses = json['numOfRepasses'];
+    studentId = json['studentId'];
+    prId = json['prId'];
+    prLink = json['prLink'];
+  }
 }

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:puble_frontend/const/constant.dart';
 import 'package:puble_frontend/data/task_data.dart';
+import 'package:puble_frontend/models/auth_model.dart';
 import 'package:puble_frontend/screens/login/login_screen.dart';
 import 'package:puble_frontend/utils/search_provider.dart';
 import 'package:puble_frontend/utils/sort_provider.dart';
@@ -33,13 +34,19 @@ class App extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return MaterialApp(
-        title: 'Puble',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            scaffoldBackgroundColor: loginPageBackgroundColor,
-            brightness: Brightness.dark,
-            textTheme: GoogleFonts.notoSansCherokeeTextTheme(textTheme)),
-     home: const Login()
-     );
+      title: 'Puble',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          scaffoldBackgroundColor: loginPageBackgroundColor,
+          brightness: Brightness.dark,
+          textTheme: GoogleFonts.notoSansCherokeeTextTheme(textTheme)),
+      home: Provider<RegisterModel>(
+        create: (context) => RegisterModel(),
+        child: Provider<AuthModel>(
+          create: (context) => AuthModel(),
+          child: const Login(),
+        ),
+      ),
+    );
   }
 }

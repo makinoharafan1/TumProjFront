@@ -11,3 +11,5 @@ const sideMenuColor = Color(0xFF171821);
 
 const defaultPadding = 20.0;
 const double defaultCircularRadius = 3;
+
+const String host = "http://127.0.0.1:8000/";

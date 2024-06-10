@@ -81,10 +81,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           child: TabBarView(
                             children: [
                               loginForm(
-                                context, 
-                                passwordController,
-                                emailController
-                              ),
+                                  context, passwordController, emailController),
                               registerForm(
                                 context,
                                 nameController,

@@ -6,19 +6,16 @@ import 'package:puble_frontend/data/task_data.dart';
 
 import 'package:puble_frontend/models/task_model.dart';
 
-
 class TaskList extends StatelessWidget {
-
   final void Function(Task) callback;
 
   const TaskList({
-    super.key, 
+    super.key,
     required this.callback,
   });
 
   @override
   Widget build(BuildContext context) {
-    
     final tasks = Provider.of<TaskData>(context).data;
 
     return ScrollConfiguration(
@@ -27,28 +24,30 @@ class TaskList extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
-        child:
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  "Title",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Title",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) => TaskElement(task: tasks[index], callback: callback,),
+            ),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: tasks.length,
+                itemBuilder: (context, index) => TaskElement(
+                  task: tasks[index],
+                  callback: callback,
                 ),
               ),
+            ),
           ],
         ),
       ),
@@ -61,11 +60,7 @@ class TaskElement extends StatelessWidget {
 
   final void Function(Task) callback;
 
-  const TaskElement({
-    super.key, 
-    required this.task,
-    required this.callback
-  });
+  const TaskElement({super.key, required this.task, required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +98,7 @@ class TaskElement extends StatelessWidget {
                     ),
                   ),
                 ),
-                map[task.state]!(context),
+                map[TaskState.NotLoaded]!(context),
               ],
             ),
           ),
