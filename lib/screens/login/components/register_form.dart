@@ -67,6 +67,18 @@ Form registerForm(
           ),
           const Spacer(flex: 2),
           InputWidget(
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (String? value) {},
+            onChanged: (String? v) {
+              value.group = v!;
+            },
+            // validator: (String? value) {},
+            topLabel: "Group",
+            hintText: "Enter group",
+            textEditingController: emailController,
+          ),
+          const Spacer(flex: 2),
+          InputWidget(
             topLabel: "Teacher",
             hintText: "Enter teacher",
             onSaved: (String? uPassword) {},
@@ -124,7 +136,8 @@ Form registerForm(
                 registerStudent(
                     logging: '${value.sername}_${value.name}',
                     password: value.password,
-                    teacher: value.teacher);
+                    teacher: value.teacher,
+                    group: value.group);
               }
             },
             text: "Create account",

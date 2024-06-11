@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puble_frontend/utils/create_pr.dart';
+import 'package:puble_frontend/utils/validate_pr_link.dart';
 import 'package:puble_frontend/variables/variables.dart';
 
 class LoadWorkWindow extends StatelessWidget {
@@ -30,9 +31,14 @@ class LoadWorkWindow extends StatelessWidget {
           child: const Text('Отмена'),
         ),
         TextButton(
-          onPressed: () {
-            createPR(link: sendingLink!, comment: '');
-            Navigator.pop(context, 'Отправить');
+          onPressed: () async {
+            if (context.mounted) {
+              if (await validatePRLink(
+                  prLink: sendingLink!, context: context)) {
+                createPR(link: sendingLink!, comment: '');
+                Navigator.pop(context, 'Отправить');
+              }
+            }
           },
           child: const Text('Отправить'),
         ),

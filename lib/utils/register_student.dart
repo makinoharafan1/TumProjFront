@@ -6,6 +6,7 @@ Future<void> registerStudent({
   required String logging,
   required String password,
   required String teacher,
+  required String group,
 }) async {
   var x = Uri.parse('${host}create_student');
   var mg = jsonEncode({

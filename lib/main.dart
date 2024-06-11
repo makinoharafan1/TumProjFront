@@ -39,7 +39,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: loginPageBackgroundColor,
           brightness: Brightness.dark,
-          textTheme: GoogleFonts.notoSansCherokeeTextTheme(textTheme)),
+          textTheme: GoogleFonts.notoSansCherokeeTextTheme(
+              const TextTheme(titleMedium: TextStyle(color: Colors.white)))),
       home: Provider<RegisterModel>(
         create: (context) => RegisterModel(),
         child: Provider<AuthModel>(
