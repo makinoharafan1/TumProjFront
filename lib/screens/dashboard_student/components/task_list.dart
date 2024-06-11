@@ -98,7 +98,7 @@ class TaskElement extends StatelessWidget {
                     ),
                   ),
                 ),
-                map[TaskState.NotLoaded]!(context),
+                map[TaskState.NotLoaded]!(context, task.number),
               ],
             ),
           ),

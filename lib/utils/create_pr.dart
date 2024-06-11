@@ -7,12 +7,14 @@ import 'package:puble_frontend/variables/variables.dart';
 Future<bool> createPR({
   required String link,
   required String comment,
+  required int lrNum,
 }) async {
   var x = Uri.parse('${host}create_pull_request');
   var mg = jsonEncode({
     'auth_key': authKey,
     'pull_link': link,
     'comment': comment,
+    'lr_num': lrNum,
   });
 
   final response = await http.post(

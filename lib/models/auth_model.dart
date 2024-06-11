@@ -1,5 +1,3 @@
-import 'package:puble_frontend/models/pr_model.dart';
-
 class AuthModel {
   late String logging;
   late String password;

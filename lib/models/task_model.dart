@@ -6,9 +6,9 @@ import 'package:puble_frontend/screens/dashboard_student/components/circle_icon.
 import 'package:puble_frontend/screens/dashboard_student/components/confirmation_window.dart';
 import 'package:puble_frontend/screens/dashboard_student/components/load_work_window.dart';
 
-enum TaskState { NotLoaded, Awaiting, Rejected, Approved}
+enum TaskState { NotLoaded, Awaiting, Rejected, Approved }
 
-class Task{
+class Task {
   final int number;
   String description;
   TaskState state;
@@ -19,43 +19,46 @@ class Task{
   });
 }
 
-var map = <TaskState, Function(BuildContext)>{
-  TaskState.NotLoaded: (context) {
+var map = <TaskState, Function(BuildContext, int)>{
+  TaskState.NotLoaded: (context, n) {
     return CircleIconButton(
       onPress: () => showDialog<String>(
         context: context,
-        builder: (BuildContext context) => const LoadWorkWindow(title: "Отправка", hintText: "Вставте ссылку на репозиторий",),
+        builder: (BuildContext context) => LoadWorkWindow(
+            title: "Отправка",
+            hintText: "Вставте ссылку на репозиторий",
+            index: n),
       ),
       backgroundColor: Colors.grey,
-      iconContentColor: Colors.black, 
+      iconContentColor: Colors.black,
       iconData: Icons.add,
     );
   },
-
-  TaskState.Awaiting: (context) {
+  TaskState.Awaiting: (context, n) {
     return const CircleIcon(
       backgroundColor: Colors.yellow,
-      iconContentColor: Colors.black, 
+      iconContentColor: Colors.black,
       iconData: Icons.remove_red_eye,
     );
   },
-
-  TaskState.Approved: (context) {
+  TaskState.Approved: (context, n) {
     return const CircleIcon(
       backgroundColor: Colors.green,
-      iconContentColor: Colors.black, 
+      iconContentColor: Colors.black,
       iconData: Icons.check,
     );
   },
-
-  TaskState.Rejected: (context) {
+  TaskState.Rejected: (context, n) {
     return CircleIconButton(
       onPress: () => showDialog<String>(
         context: context,
-        builder: (BuildContext context) => const ConfirmationWindow(title: "Подтверждение", description: "Отправить работу на проверку преподавателю",),
+        builder: (BuildContext context) => const ConfirmationWindow(
+          title: "Подтверждение",
+          description: "Отправить работу на проверку преподавателю",
+        ),
       ),
       backgroundColor: Colors.red,
-      iconContentColor: Colors.black, 
+      iconContentColor: Colors.black,
       iconData: Icons.clear,
     );
   }

@@ -6,9 +6,13 @@ import 'package:puble_frontend/variables/variables.dart';
 class LoadWorkWindow extends StatelessWidget {
   final String title;
   final String hintText;
+  final int index;
 
   const LoadWorkWindow(
-      {super.key, required this.title, required this.hintText});
+      {super.key,
+      required this.title,
+      required this.hintText,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class LoadWorkWindow extends StatelessWidget {
             if (context.mounted) {
               if (await validatePRLink(
                   prLink: sendingLink!, context: context)) {
-                createPR(link: sendingLink!, comment: '');
+                createPR(link: sendingLink!, comment: '', lrNum: index);
                 Navigator.pop(context, 'Отправить');
               }
             }
