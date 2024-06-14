@@ -1,7 +1,7 @@
-import 'package:tum_proj/models/pr_list_element_model.dart';
+import 'package:puble_frontend/models/pr_model.dart';
 
 class PullRequestsListModel {
-  final List<PullRequestElementModel> list;
+  final List<PullRequestModel> list;
   late bool isLoading;
   PullRequestsListModel({
     required this.list,
